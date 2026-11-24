@@ -39,7 +39,9 @@ theorem PEqualNP.Outside.R_meta_1479_37
     have hMem := List.mem_of_getElem? hj
     obtain ⟨a,b,hab⟩ := List.length_eq_two.mp (hAO.2.2 g hMem)
     have hg : gateAt C j = g := by
-      simp only [gateAt, List.getD_eq_getElem?_getD, hj, Option.getD_some]
+      change C.gates.getD j ⟨GateOp.or, []⟩ = g
+      rw [List.getD_eq_getElem?_getD, hj]
+      rfl
     refine ⟨hAO.1 g hMem, a, b, hab, ?_, ?_, ?_⟩
     · simpa [hab] using hDistinct g hMem
     · apply hAO.2.1 j hjLen
